@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Some  pyton code and exercises"""
 
-from re import sub
+import re
 from typing import List
 import logging
 import mysql.connector
@@ -13,9 +13,8 @@ PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 def filter_datum(fields: List[str], redaction: str,
                  message: str, separator: str) -> str:
     """Function to obfuscate values of fields using regex"""
-    return sub(f'({"|".join(fields)})=[^{separator}]*',
-               f'\\1={redaction}',
-               message)
+    return re.sub(f'({"|".join(fields)})=[^{separator}]*',
+                  f'\\1={redaction}', message)
 
 
 class RedactingFormatter(logging.Formatter):
