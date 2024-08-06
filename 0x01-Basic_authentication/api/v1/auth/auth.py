@@ -9,15 +9,11 @@ class Auth():
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """returns true if path is authorized not in excluded_paths"""
-        excluded_paths = ['/api/v1/status/',
-                          '/api/v1/unauthorized/',
-                          '/api/v1/forbidden/'
-                          ]
         if not path or not excluded_paths:
             return True
-        path = path.rstrip('/') + '/'
+        path = path.rstrip('/')
         for ex_path in excluded_paths:
-            ex_path = ex_path.rstrip('/') + '/'
+            ex_path = ex_path.rstrip('/')
             if path.startswith(ex_path[0:-1]) or path == ex_path:
                 return False
         return True
@@ -30,5 +26,4 @@ class Auth():
 
     def current_user(self, request=None) -> TypeVar('User'):
         """User Authorization"""
-
         return None
