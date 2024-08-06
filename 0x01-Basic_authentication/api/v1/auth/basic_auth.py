@@ -51,9 +51,7 @@ class BasicAuth(Auth):
                                      user_pwd: str
                                      ) -> TypeVar('User'):
         """Returns a User object from a username and password"""
-        if not user_email or not user_pwd:
-            return None
-        if not User.all():
+        if not isinstance(user_email, str) or not isinstance(user_pwd, str):
             return None
         try:
             user = User.search({'email': user_email})[0]
