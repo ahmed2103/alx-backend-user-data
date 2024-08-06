@@ -6,6 +6,7 @@ import base64
 from models.user import User
 from flask import request
 from typing import TypeVar, Tuple
+import binascii
 
 class BasicAuth(Auth):
     """Authenication Class for Flask API using Basic Auth"""
