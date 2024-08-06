@@ -2,16 +2,17 @@
 """Basic authincation module"""
 import binascii
 from typing import TypeVar
-
 from api.v1.auth.auth import Auth
 import base64
 from models.user import User
 
+
 class BasicAuth(Auth):
     """Authenication Class for Flask API using Basic Auth"""
 
-    def extract_base64_authorization_header(self, authorization_header: str) \
-            -> str:
+    def extract_base64_authorization_header(self,
+                                            authorization_header: str
+                                            ) -> str:
         """Returns the Base64 part of the Authorization header
             for a Basic Authentication"""
         if (not authorization_header or
@@ -21,8 +22,8 @@ class BasicAuth(Auth):
             return authorization_header[6:]
 
     def decode_base64_authorization_header(self,
-                                           base64_authorization_header: str) \
-            -> str:
+                                           base64_authorization_header: str
+                                           ) -> str:
         """Returns the decoded value of a Base64 string"""
         if (not base64_authorization_header or
             not isinstance(base64_authorization_header, str)):
@@ -34,8 +35,8 @@ class BasicAuth(Auth):
             return None
 
     def extract_user_credentials(self,
-                                 decoded_base64_authorization_header: str)\
-                                                                -> (str, str):
+                                 decoded_base64_authorization_header: str
+                                 ) -> (str, str):
         """extracts the username and password from a formatted string"""
         try:
             username, password = (
@@ -45,7 +46,8 @@ class BasicAuth(Auth):
             return None, None
 
     def user_object_from_credentials(self, user_email: str,
-                                     user_pwd: str) -> TypeVar('User'):
+                                     user_pwd: str
+                                     ) -> TypeVar('User'):
         """Returns a User object from a username and password"""
         if not user_email or not user_pwd:
             return None
@@ -73,8 +75,3 @@ class BasicAuth(Auth):
                     if email and pwd:
                         return self.user_object_from_credentials(email, pwd)
         return None
-
-
-
-
-
