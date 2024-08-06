@@ -5,6 +5,7 @@ from typing import TypeVar
 from api.v1.auth.auth import Auth
 import base64
 from models.user import User
+from flask import request
 
 
 class BasicAuth(Auth):
@@ -61,7 +62,7 @@ class BasicAuth(Auth):
             return None
         return user
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request: request = None) -> TypeVar('User'):
         """Returns a User based on request header"""
         auth_header = self.authorization_header(request)
         if auth_header:
