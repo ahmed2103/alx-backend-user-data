@@ -57,9 +57,9 @@ class BasicAuth(Auth):
             user = User.search({'email': user_email})[0]
         except IndexError:
             return None
-        if not user.is_valid_password(user_pwd):
-            return None
-        return user
+        if user.is_valid_password(user_pwd):
+            return user
+        return None
 
     def current_user(self, request: request = None) -> TypeVar('User'):
         """Returns a User based on request header"""
