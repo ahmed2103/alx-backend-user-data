@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """Basic authincation module"""
 import binascii
-from typing import TypeVar
 from api.v1.auth.auth import Auth
 import base64
 from models.user import User
 from flask import request
-
+from typing import TypeVar, Tuple
 
 class BasicAuth(Auth):
     """Authenication Class for Flask API using Basic Auth"""
@@ -37,7 +36,7 @@ class BasicAuth(Auth):
 
     def extract_user_credentials(self,
                                  decoded_base64_authorization_header: str
-                                 ) -> (str, str):
+                                 ) -> Tuple[str, str]:
         """extracts the username and password from a formatted string"""
         try:
             username, password = (
