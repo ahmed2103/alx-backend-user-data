@@ -4,7 +4,8 @@ from flask import request
 from typing import List, TypeVar
 import os
 
-class Auth():
+
+class Auth:
     """Represents authenication to api"""
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
@@ -28,7 +29,7 @@ class Auth():
         """User Authorization"""
         return None
 
-    def session_cookie(self, request: request =None):
+    def session_cookie(self, request=None) -> str:
         """Retrieves session id from cookie of request"""
         if request is None:
             return None
