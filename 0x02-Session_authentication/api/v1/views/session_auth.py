@@ -2,14 +2,15 @@
 """Flask view that handles all routes for the Session authentication"""
 
 
-from flask import jsonify, request, Response, abort
+from flask import jsonify, request, abort
 from api.v1.views import app_views
 from models.user import User
 import os
 
 
-@app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
-def auth_session_log_in() -> Response:
+@app_views.route('/auth_session/login', methods=['POST'],
+                 strict_slashes=False)
+def auth_session_log_in() -> str:
     """logs user in"""
     email = request.form.get('email')
     if email is None:
@@ -31,8 +32,9 @@ def auth_session_log_in() -> Response:
     out.set_cookie(cookie_name, sess_id)
     return out
 
-@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
-def auth_session_log_out():
+@app_views.route('/auth_session/logout', methods=['DELETE'],
+                 strict_slashes=False)
+def auth_session_log_out() -> str:
     """logs user out"""
     from api.v1.app import auth
     if not auth.destroy_session(request):
