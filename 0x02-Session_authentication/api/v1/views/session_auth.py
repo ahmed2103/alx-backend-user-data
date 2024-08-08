@@ -12,7 +12,7 @@ from typing import Tuple
 @app_views.route('/auth_session/login', methods=['POST'],
                  strict_slashes=False)
 def auth_session_log_in() -> Tuple[str, int]:
-    """logs user in"""
+    """POST /api/v1/auth_session/login"""
     email = request.form.get('email')
     if email is None:
         return jsonify({ "error": "email missing" }), 400
@@ -36,7 +36,7 @@ def auth_session_log_in() -> Tuple[str, int]:
 @app_views.route('/auth_session/logout', methods=['DELETE'],
                  strict_slashes=False)
 def auth_session_log_out() -> Tuple[str, int]:
-    """logs user out"""
+    """DELETE /api/v1/auth_session/logout"""
     from api.v1.app import auth
     if not auth.destroy_session(request):
         abort(404)
