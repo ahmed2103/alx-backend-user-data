@@ -35,7 +35,7 @@ def auth_session_log_in() -> Tuple[str, int]:
 
 @app_views.route('/auth_session/logout', methods=['DELETE'],
                  strict_slashes=False)
-def auth_session_log_out() -> strTuple[str, int]:
+def auth_session_log_out() -> Tuple[str, int]:
     """logs user out"""
     from api.v1.app import auth
     if not auth.destroy_session(request):
