@@ -22,7 +22,7 @@ class SessionDBAuth(SessionExpAuth):
             return None
         created_at = user_session.created_at
         time_threshold = created_at + timedelta(seconds=self.session_duration)
-        if time_threshold < datetime.now():
+        if time_threshold < datetime.utcnow():
             return None
         return user_session.user_id
 
