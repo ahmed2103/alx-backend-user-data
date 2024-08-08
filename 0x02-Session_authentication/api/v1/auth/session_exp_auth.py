@@ -6,6 +6,7 @@ from api.v1.auth.session_auth import SessionAuth
 import os
 from datetime import datetime, timedelta
 
+
 class SessionExpAuth(SessionAuth):
     """Class to add session expiration functionality to authenication system"""
 
@@ -16,7 +17,8 @@ class SessionExpAuth(SessionAuth):
         except (ValueError, TypeError):
             self.session_duration = 0
 
-    def create_session(self, user_id: str=None) -> str:
+    def create_session(self, user_id: str = None) -> str:
+        """Create session and returns its ID"""
         sess_id = super().create_session(user_id)
         if sess_id is None:
             return None
@@ -27,7 +29,8 @@ class SessionExpAuth(SessionAuth):
         self.user_id_by_session_id[sess_id] = session_dictionary
         return sess_id
 
-    def user_id_for_session_id(self, session_id: str =None):
+    def user_id_for_session_id(self, session_id: str = None) -> str:
+        """Retrieves user if session_id is provided"""
         if session_id is None or session_id not in self.user_id_by_session_id:
             return None
         if self.session_duration == 0:

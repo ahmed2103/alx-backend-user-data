@@ -4,7 +4,6 @@
 
 from api.v1.auth.auth import Auth
 import uuid
-import os
 from models.user import User
 
 
@@ -26,7 +25,7 @@ class SessionAuth(Auth):
             return None
         return self.user_id_by_session_id.get(session_id)
 
-    def current_user(self, request=None):
+    def current_user(self, request=None) -> User:
         """Retrieves current user from cookie"""
         session_id = self.session_cookie(request)
         if session_id:
