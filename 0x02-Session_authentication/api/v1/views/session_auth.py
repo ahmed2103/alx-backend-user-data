@@ -6,11 +6,12 @@ from flask import jsonify, request, abort
 from api.v1.views import app_views
 from models.user import User
 import os
+from typing import Tuple
 
 
 @app_views.route('/auth_session/login', methods=['POST'],
                  strict_slashes=False)
-def auth_session_log_in() -> str:
+def auth_session_log_in() -> Tuple[str, int]:
     """logs user in"""
     email = request.form.get('email')
     if email is None:
@@ -34,7 +35,7 @@ def auth_session_log_in() -> str:
 
 @app_views.route('/auth_session/logout', methods=['DELETE'],
                  strict_slashes=False)
-def auth_session_log_out() -> str:
+def auth_session_log_out() -> strTuple[str, int]:
     """logs user out"""
     from api.v1.app import auth
     if not auth.destroy_session(request):
