@@ -6,6 +6,7 @@ import requests
 
 url = 'http://0.0.0.0:5000'
 
+
 def register_user(email: str, password: str) -> None:
     """Test registeration"""
     endpoint = f'{url}/users'
@@ -17,12 +18,14 @@ def register_user(email: str, password: str) -> None:
     assert respone2.status_code == 400
     assert (respone2.json() == {"message": "email already registered"})
 
+
 def log_in_wrong_password(email: str, password: str) -> None:
     """Tests wrong login"""
     endpoint = f'{url}/sessions'
     data = {'email': email, "password": password}
     response = requests.post(endpoint, data=data)
     assert response.status_code == 401
+
 
 def log_in(email: str, password: str) -> str:
     """Tests login"""
@@ -33,11 +36,13 @@ def log_in(email: str, password: str) -> str:
     assert response.json() == {"email": email, "message": "logged in"}
     return response.cookies.get('session_id')
 
+
 def profile_unlogged() -> None:
     """testing data when no user is logged in"""
     endpoint = f'{url}/profile'
     response = requests.get(endpoint)
     assert response.status_code == 403
+
 
 def profile_logged(session_id: str) -> None:
     """testing  when logged in"""
@@ -47,6 +52,7 @@ def profile_logged(session_id: str) -> None:
     assert response.status_code == 200
     assert response.json() == {"email": EMAIL}
 
+
 def log_out(session_id) -> None:
     """Tests log out endpoint"""
     endpoint = f'{url}/sessions'
@@ -54,6 +60,7 @@ def log_out(session_id) -> None:
     response = requests.delete(endpoint, cookies=cookies)
     assert response.status_code == 200
     assert response.json() == {"message": "Bienvenue"}
+
 
 def reset_password_token(email: str) -> str:
     """Tests reset password endpoint"""
@@ -65,6 +72,7 @@ def reset_password_token(email: str) -> str:
     assert reset_token is not None
     return reset_token
 
+
 def update_password(email: str, reset_token: str, password: str) -> None:
     """Tests update password endpoint"""
     endpoint = f'{url}/reset_password'
@@ -72,6 +80,7 @@ def update_password(email: str, reset_token: str, password: str) -> None:
     response = requests.put(endpoint, data=data)
     assert response.status_code == 200
     assert response.json() == {'email': email, "message": "Password updated"}
+
 
 EMAIL = "guillaume@holberton.io"
 PASSWD = "b4l0u"

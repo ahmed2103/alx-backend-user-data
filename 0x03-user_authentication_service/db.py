@@ -68,4 +68,3 @@ class DB:
         except Exception:
             self._session.rollback()
             raise
-

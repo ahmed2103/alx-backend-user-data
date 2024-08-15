@@ -8,28 +8,31 @@ from auth import Auth
 auth = Auth()
 app = Flask(__name__)
 
+
 @app.route("/", strict_slashes=False)
 def index() -> str:
     """GET /
         Returns a JSON payload of the form"""
-    return jsonify({ "message": "Bienvenue" })
+    return jsonify({"message": "Bienvenue"})
+
 
 @app.route("/users", methods=["POST"], strict_slashes=False)
-def user_registration()-> Tuple[str, int]:
+def user_registration() -> Tuple[str, int]:
     """POST /users
         Register a new user"""
     data = request.form
     if 'email' in data and 'password' in data:
         try:
-            auth.register_user(email = data['email'], password = data['password'])
+            auth.register_user(email=data['email'], password=data['password'])
             return jsonify({'email': data['email'],
                             "message": "user created"}
-                           ),200
+                           ), 200
         except ValueError:
             return jsonify({"message": "email already registered"}), 400
 
+
 @app.route("/sessions", methods=["POST"], strict_slashes=False)
-def login_session()-> Tuple[str, int]:
+def login_session() -> Tuple[str, int]:
     """POST /sessions
         logs user in"""
     email = request.form.get('email')
@@ -42,8 +45,9 @@ def login_session()-> Tuple[str, int]:
             return res, 200
     abort(401)
 
+
 @app.route("/sessions", methods=["DELETE"], strict_slashes=False)
-def logout_session()-> Tuple[str, int]:
+def logout_session() -> Tuple[str, int]:
     """DELETE /sessions
     logs user out"""
     session_id = request.cookies.get("session_id")
@@ -52,8 +56,9 @@ def logout_session()-> Tuple[str, int]:
         auth.destroy_session(user.id)
         return redirect('/')
 
+
 @app.route("/profile", strict_slashes=False)
-def user_profile()-> Tuple[str, int]:
+def user_profile() -> Tuple[str, int]:
     """GET /profile
         returns user profile in json"""
     session_id = request.cookies.get("session_id")
@@ -63,8 +68,9 @@ def user_profile()-> Tuple[str, int]:
     else:
         abort(403)
 
+
 @app.route('/reset_password', methods=["POST"], strict_slashes=False)
-def reset_password()-> Tuple[str, int]:
+def reset_password() -> Tuple[str, int]:
     """POST /reset_password
         rturns reset token"""
     email = request.form.get('email')
@@ -74,8 +80,9 @@ def reset_password()-> Tuple[str, int]:
         abort(403)
     return jsonify({'email': email, 'reset_token': reset_tokent}), 200
 
+
 @app.route('/reset_password', methods=["PUT"], strict_slashes=False)
-def update_passwoed()-> Tuple[str, int]:
+def update_passwoed() -> Tuple[str, int]:
     """PUT /reset_password
         updates user password"""
     email = request.form.get('email')
@@ -84,11 +91,10 @@ def update_passwoed()-> Tuple[str, int]:
     if email and password and reset_tokent:
         try:
             auth.update_password(reset_tokent, password)
-            return jsonify({'email':email,"message":"Password updated"}), 200
+            return (jsonify({'email': email, "message": "Password updated"}),
+                    200)
         except ValueError:
             abort(403)
-
-
 
 
 if __name__ == "__main__":

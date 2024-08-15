@@ -12,9 +12,11 @@ def _generate_uuid() -> str:
     """"Generate a random UUID"""
     return str(uuid.uuid4())
 
+
 def _hash_password(password: str) -> bytes:
     """return cypted password in bytes"""
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
 
 class Auth:
     """Auth class to interact with the authentication database.
