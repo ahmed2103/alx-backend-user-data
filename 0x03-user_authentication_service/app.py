@@ -51,10 +51,11 @@ def logout_session() -> Tuple[str, int]:
     """DELETE /sessions
     logs user out"""
     session_id = request.cookies.get("session_id")
-    if session_id:
-        user = auth.get_user_from_session_id(session_id)
-        auth.destroy_session(user.id)
-        return redirect('/')
+    user = auth.get_user_from_session_id(session_id)
+    if user is None:
+        abort(403)
+    auth.destroy_session(user.id)
+    return redirect('/')
 
 
 @app.route("/profile", strict_slashes=False)
