@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/../0x01-Basic_authentication/api/v1/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../0x01-Basic_authentication/api/v1/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../0x02-Session_authentication/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../0x02-Session_authentication/.idea/material_theme_project_new.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +42,7 @@
     <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
+    <option name="proportion" value="0.9" />
     <option name="showPreview" value="true" />
   </component>
   <component name="ProjectColorInfo">{
@@ -159,7 +161,7 @@
       <workItem from="1723542788352" duration="22163000" />
       <workItem from="1723625098270" duration="7145000" />
       <workItem from="1723710690816" duration="5360000" />
-      <workItem from="1723719789364" duration="1423000" />
+      <workItem from="1723719789364" duration="2688000" />
     </task>
     <servers />
   </component>

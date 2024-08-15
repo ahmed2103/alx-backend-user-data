@@ -44,13 +44,13 @@ class DB:
 
     def find_user_by(self, **attrs: Dict) -> User:
         """Find a user by attributes"""
-        try:
-            user = self._session.query(User).filter_by(**attrs).first()
-            if user is None:
-                raise NoResultFound()
-            return user
-        except InvalidRequestError:
-            raise
+        for attr in attrs:
+            if not hasattr(User, attr):
+                raise InvalidRequestError()
+        user = self._session.query(User).filter_by(**attrs).first()
+        if user is None:
+            raise NoResultFound()
+        return user
 
     def update_user(self, user_id: int, **attrs: Dict) -> None:
         """Updates user attributes"""
